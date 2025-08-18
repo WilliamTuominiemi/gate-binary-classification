@@ -53,4 +53,10 @@ X = [(0, 0), (0, 1), (1, 0), (1, 1)]
 Y = [0, 0, 0, 1] # AND
 # Y = [0, 1, 1, 1] # OR
 
-train(X, Y, 10, 0.1)
+(w1, w2, b) = train(X, Y, 200, 0.2)
+
+index = 0
+for (x1, x2) in X:
+    prediction = forward_pass(w1, x1, w2, x2, b)
+    print(prediction, Y[index])
+    index += 1
