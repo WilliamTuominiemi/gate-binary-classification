@@ -71,3 +71,17 @@ def AND_gate():
         prediction = forward_pass(w1, x1, w2, x2, b)
         print("prediction: ", round(prediction, 2), "| actual: ", Y[index])
         index += 1
+
+def OR_gate():
+    X = [(0, 0), (0, 1), (1, 0), (1, 1)]
+    Y = [0, 1, 1, 1]
+
+    (w1, w2, b) = train(X, Y, 500, 0.5)
+
+    index = 0
+    for (x1, x2) in X:
+        prediction = forward_pass(w1, x1, w2, x2, b)
+        print("prediction: ", round(prediction, 2), "| actual: ", Y[index])
+        index += 1
+
+OR_gate()
