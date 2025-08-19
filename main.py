@@ -60,15 +60,14 @@ def train(X, Y, epochs, learning_rate):
                            sum(loss_y_pred) / len(loss_y_pred)))
     return w1, w2, b
 
-X = [(0, 0), (0, 1), (1, 0), (1, 1)]
+def AND_gate():
+    X = [(0, 0), (0, 1), (1, 0), (1, 1)]
+    Y = [0, 0, 0, 1]
 
-Y = [0, 0, 0, 1] # AND
-# Y = [0, 1, 1, 1] # OR
+    (w1, w2, b) = train(X, Y, 500, 0.5)
 
-(w1, w2, b) = train(X, Y, 500, 0.5)
-
-index = 0
-for (x1, x2) in X:
-    prediction = forward_pass(w1, x1, w2, x2, b)
-    print("prediction: ", round(prediction, 2), "| actual: ", Y[index])
-    index += 1
+    index = 0
+    for (x1, x2) in X:
+        prediction = forward_pass(w1, x1, w2, x2, b)
+        print("prediction: ", round(prediction, 2), "| actual: ", Y[index])
+        index += 1
