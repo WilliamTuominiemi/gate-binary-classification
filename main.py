@@ -129,4 +129,8 @@ def XOR_gate():
 
     predict_with_hidden_layer(X, Y, Y_AND, Y_OR, epochs=500, loss=0.5)
 
+# AND_gate()
+# OR_gate()
+# NAND_gate()
+# NOR_gate()
 XOR_gate()
