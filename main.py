@@ -98,3 +98,35 @@ def NOR_gate():
     (w1, w2, b) = train(X, Y, 500, 0.5)
 
     predict(X, Y, w1, w2, b)
+
+def predict_with_hidden_layer(X, Y, Y_AND, Y_OR,  epochs, loss):
+    (w11, w12, b1) = train(X, Y_AND, epochs, loss) # AND
+    (w21, w22, b2) = train(X, Y_OR, epochs, loss) # OR
+
+    H = []
+
+    # Hidden layer, combined AND and OR for XOR
+    for (x1, x2) in X:
+        prediction_AND = forward_pass(w11, x1, w12, x2, b1)
+        prediction_OR = forward_pass(w21, x1, w22, x2, b2)
+        H.append((prediction_AND, prediction_OR))
+
+    # Train new weights with result from hidden layer 
+    (w1, w2, b) = train(H, Y, epochs, loss) # XOR
+
+    index = 0
+    for (h1, h2) in H:
+        prediction = forward_pass(w1, h1, w2, h2, b)
+        print("prediction: ", round(prediction, 2), "| actual: ", Y[index])
+        index += 1
+
+def XOR_gate():
+    X = [(0, 0), (0, 1), (1, 0), (1, 1)]
+    Y = [0, 1, 1, 0]
+
+    Y_AND = [0, 0, 0, 1]
+    Y_OR = [0, 1, 1, 1]
+
+    predict_with_hidden_layer(X, Y, Y_AND, Y_OR, epochs=500, loss=0.5)
+
+XOR_gate()
